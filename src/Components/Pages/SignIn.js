@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Input from "../Form/Input";
-import { Link, useNavigate } from "react-router-dom";
-const API_URL = "http://localhost:3004/users/register";
+import Message from "../Layout/Message";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+const API_URL = "http://localhost:3003/session/login";
 
 function SignIn() {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [login, setLogin] = useState({
     email: "",
     password: "",
@@ -21,23 +24,29 @@ function SignIn() {
   function submit(e) {
     e.preventDefault();
     if (!validate()) return false;
-    navigate("/");
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "http://localhost:3004",
-    //     "Access-Control-Allow-Credentials": true,
-    //   },
-    //   credentials: "include",
-    //   body: JSON.stringify(login),
-    // };
-    // fetch(API_URL, requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((err) => console.log(err));
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3004",
+        "Access-Control-Allow-Credentials": true,
+      },
+      credentials: "include",
+      body: JSON.stringify(login),
+    };
+    fetch(API_URL, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?.error) {
+          const errors = {};
+          errors.login = data.error;
+          setFormErrors(errors);
+          return false;
+        }
+        navigate("/", { state: { message: "Successfully logged in" } });
+      })
+      .catch((err) => console.log(err));
   }
   function validate() {
     const errors = {};
@@ -71,6 +80,9 @@ function SignIn() {
     <div className="container">
       <div className="form_container">
         <h1 id="form_header">Sign in</h1>
+        {location.state?.message && (
+          <Message message={location.state.message} type="success" />
+        )}
         <form onSubmit={submit}>
           <Input
             type="email"
@@ -91,7 +103,7 @@ function SignIn() {
           />
 
           <input value="Sign in" className="input_submit" type="submit" />
-
+          <p className="input_error">{formErrors?.login}</p>
           <p>
             Don't have an account? <Link to="/signup"> Register </Link>
           </p>

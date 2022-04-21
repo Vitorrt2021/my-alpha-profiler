@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Input from "../Form/Input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./SignUp.css";
-const API_URL = "http://localhost:3004/users/register";
+const API_URL = "http://localhost:3003/user/create";
 
 function SignUp() {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [register, setRegister] = useState({
     username: "",
     email: "",
@@ -25,23 +27,35 @@ function SignUp() {
   function submit(e) {
     e.preventDefault();
     if (!validate()) return false;
-    navigate("/signin");
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "http://localhost:3004",
-    //     "Access-Control-Allow-Credentials": true,
-    //   },
-    //   credentials: "include",
-    //   body: JSON.stringify(register),
-    // };
-    // fetch(API_URL, requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((err) => console.log(err));
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3004",
+        "Access-Control-Allow-Credentials": true,
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        username: register.username,
+        password: register.password,
+        email: register.email,
+        birthdate: register.birth_date,
+      }),
+    };
+    fetch(API_URL, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data?.id) {
+          const errors = {};
+          errors.login = "We had a problem try later";
+          setFormErrors(errors);
+          return false;
+        }
+        navigate("/signin", {
+          state: { message: "Account created successfully" },
+        });
+      })
+      .catch((err) => console.log(err));
   }
   function validate() {
     const errors = {};
@@ -141,6 +155,7 @@ function SignUp() {
             className="input_submit"
             type="submit"
           />
+          <p className="input_error">{formErrors?.login}</p>
 
           <p>
             Already have an account? <Link to="/signin"> Login </Link>

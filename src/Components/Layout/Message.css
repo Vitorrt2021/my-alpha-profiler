@@ -1,0 +1,17 @@
+.message_success{
+    background-color: rgb(71, 219, 71);
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message_error{
+    background-color: rgb(219, 81, 71);
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
