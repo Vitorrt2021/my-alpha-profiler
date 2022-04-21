@@ -1,3 +1,20 @@
+.input_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.input{
+    border: 1px solid gainsboro;
+    height: 30px;
+    font-size: 15px;
+}
+.input_label{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 .input_error{
-    color: red;
+    line-height: 0;
+    color: rgb(232, 16, 16);
+    font-size: 12px;
 }

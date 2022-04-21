@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "../Form/Input";
-
+import { Link } from "react-router-dom";
+import "./SignUp.css";
 const API_URL = "http://localhost:3004/users/register";
 
 function SignUp() {
@@ -73,55 +74,64 @@ function SignUp() {
     return false;
   }
   return (
-    <div>
-      <h1>SignUp</h1>
+    <div className="container">
+      <div className="form_container">
+        <h1 id="form_header">Create an account</h1>
+        <form onSubmit={submit}>
+          <Input
+            type="text"
+            text="Username"
+            name="username"
+            handleOnChange={handleChange}
+            placeholder="Username"
+            error={formErrors?.username}
+          />
+          <Input
+            type="email"
+            text="Email"
+            name="email"
+            handleOnChange={handleChange}
+            placeholder="Email"
+            error={formErrors?.email}
+          />
 
-      <form onSubmit={submit}>
-        <Input
-          type="text"
-          text="Username"
-          name="username"
-          handleOnChange={handleChange}
-          placeholder="Username"
-          error={formErrors?.username}
-        />
-        <Input
-          type="email"
-          text="Email"
-          name="email"
-          handleOnChange={handleChange}
-          placeholder="Email"
-          error={formErrors?.email}
-        />
+          <Input
+            type="date"
+            text="Birth Date"
+            name="birth_date"
+            handleOnChange={handleChange}
+            error={formErrors?.birth_date}
+          />
 
-        <Input
-          type="date"
-          text="Birth Date"
-          name="birth_date"
-          handleOnChange={handleChange}
-          error={formErrors?.birth_date}
-        />
+          <Input
+            type="password"
+            text="Password"
+            name="password"
+            handleOnChange={handleChange}
+            placeholder="Password"
+            error={formErrors?.password}
+          />
 
-        <Input
-          type="password"
-          text="Password"
-          name="password"
-          handleOnChange={handleChange}
-          placeholder="Password"
-          error={formErrors?.password}
-        />
+          <Input
+            type="password"
+            text="Confirm Password"
+            name="confirm_password"
+            handleOnChange={handleChange}
+            placeholder="Confirm Password"
+            error={formErrors?.confirm_password}
+          />
 
-        <Input
-          type="password"
-          text="Confirm Password"
-          name="confirm_password"
-          handleOnChange={handleChange}
-          placeholder="Confirm Password"
-          error={formErrors?.confirm_password}
-        />
+          <input
+            value="Create Account"
+            className="input_submit"
+            type="submit"
+          />
 
-        <input type="submit" />
-      </form>
+          <p>
+            Already have an account? <Link to="/signin"> Login </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

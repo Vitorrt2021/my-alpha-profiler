@@ -9,7 +9,7 @@ import EditProfile from "./Components/Pages/EditProfile";
 function App() {
   return (
     <Router>
-      <NavBar />
+      {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="signup" element={<SignUp />} />

@@ -9,9 +9,12 @@ function Input({
   error,
 }) {
   return (
-    <div>
-      <label htmlFor={name}>{text}</label>
+    <div className="input_container">
+      <label className="input_label" htmlFor={name}>
+        {text}
+      </label>
       <input
+        className="input"
         type={type}
         id={name}
         onChange={handleOnChange}
