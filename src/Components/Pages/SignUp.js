@@ -57,8 +57,13 @@ function SignUp() {
     } else if (!emailRegex.test(email)) {
       errors.email = "Invalid Email";
     }
+    const dateUS = new Date(birth_date);
+    const dateNow = new Date();
+
     if (!birth_date) {
       errors.birth_date = "Birth Date is required";
+    } else if (dateUS > dateNow) {
+      errors.birth_date = "Your date of birth is greater than the current date";
     }
 
     if (!password) {
