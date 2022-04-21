@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Input from "../Form/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.css";
 const API_URL = "http://localhost:3004/users/register";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [register, setRegister] = useState({
     username: "",
     email: "",
@@ -24,6 +25,7 @@ function SignUp() {
   function submit(e) {
     e.preventDefault();
     if (!validate()) return false;
+    navigate("/signin");
     // const requestOptions = {
     //   method: "POST",
     //   headers: {
@@ -60,11 +62,16 @@ function SignUp() {
 
     if (!password) {
       errors.password = "Password is required";
+    } else if (password.length < 4) {
+      errors.password = "Password is too short";
+    } else if (password.length > 40) {
+      errors.password = "Password is too long";
     }
+
     if (!confirm_password) {
       errors.confirm_password = "Confirm password is required";
     } else if (password !== confirm_password) {
-      errors.confirm_password = "password different from password confirmation";
+      errors.confirm_password = "Password is different from confirm password";
     }
 
     setFormErrors(errors);
