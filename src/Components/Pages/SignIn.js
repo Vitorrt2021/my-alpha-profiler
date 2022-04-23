@@ -4,7 +4,7 @@ import Message from "../Layout/Message";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 const API_URL = "http://localhost:3003/session/login";
 
-function SignIn() {
+function SignIn({ setToken }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,7 +44,10 @@ function SignIn() {
           setFormErrors(errors);
           return false;
         }
-        navigate("/", { state: { message: "Successfully logged in" } });
+        setToken(true)
+        navigate("/", {
+          state: { message: "Successfully logged in", type: "success" },
+        });
       })
       .catch((err) => console.log(err));
   }
@@ -81,7 +84,10 @@ function SignIn() {
       <div className="form_container">
         <h1 id="form_header">Sign in</h1>
         {location.state?.message && (
-          <Message message={location.state.message} type="success" />
+          <Message
+            message={location.state.message}
+            type={location.state.type}
+          />
         )}
         <form onSubmit={submit}>
           <Input

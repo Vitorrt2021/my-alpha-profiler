@@ -52,7 +52,7 @@ function SignUp() {
           return false;
         }
         navigate("/signin", {
-          state: { message: "Account created successfully" },
+          state: { message: "Account created successfully" ,type: "success"},
         });
       })
       .catch((err) => console.log(err));
