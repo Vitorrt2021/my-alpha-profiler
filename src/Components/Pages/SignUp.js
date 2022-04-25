@@ -22,6 +22,7 @@ function SignUp() {
       ...register,
       [e.target.name]: e.target.value,
     });
+    console.log(register)
   }
 
   function submit(e) {
