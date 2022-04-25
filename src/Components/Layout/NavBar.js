@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import styles from "./NavBar.module.css";
 
 function deleteCookie(name) {
   document.cookie = name + "=" + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
@@ -12,7 +13,7 @@ function NavBar({ setToken }) {
 
   return (
     <>
-      <ul>
+      <ul className={styles.ul}>
         <li>
           <Link to="/">Home</Link>
         </li>

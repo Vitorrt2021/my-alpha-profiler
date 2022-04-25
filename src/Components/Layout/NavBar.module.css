@@ -1,0 +1,17 @@
+.ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+.ul li a{
+    font-size: 20px;
+    color: blueviolet;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.ul li a:hover{
+    color: rgb(91, 22, 155);
+}
