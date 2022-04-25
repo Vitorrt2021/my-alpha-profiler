@@ -7,11 +7,23 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import NavBar from "./Components/Layout/NavBar";
+import Footer from "./Components/Layout/Footer";
 import Home from "./Components/Pages/Home";
 import SignIn from "./Components/Pages/SignIn";
 import SignUp from "./Components/Pages/SignUp";
 import EditProfile from "./Components/Pages/EditProfile";
 import ProtectedRoute from "./Components/Layout/ProtectedRoute";
+
+function getCookie(name) {
+  let cookie = {};
+
+  document.cookie.split(";").forEach(function (el) {
+    let [k, v] = el.split("=");
+    cookie[k.trim()] = v;
+  });
+
+  return cookie[name];
+}
 
 function App() {
   const [token, setToken] = useState(true);
@@ -20,7 +32,7 @@ function App() {
     if (document.cookie.indexOf("access_token") < 0) {
       setToken(false);
     } else {
-      setToken(true);
+      setToken(getCookie("access_token"));
     }
   }, []);
 
@@ -31,6 +43,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute token={token}>
+              <NavBar setToken={setToken} />
               <Home />
             </ProtectedRoute>
           }
@@ -41,11 +54,14 @@ function App() {
           path="edit"
           element={
             <ProtectedRoute token={token}>
+              <NavBar setToken={setToken} />
+
               <EditProfile />
             </ProtectedRoute>
           }
         />
       </Routes>
+      <Footer />
     </Router>
   );
 }

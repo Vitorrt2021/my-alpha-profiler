@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Message from "../Layout/Message";
-
-function Home() {
+import Nav from "../Layout/NavBar";
+function Home({ setToken }) {
   const location = useLocation();
 
   return (

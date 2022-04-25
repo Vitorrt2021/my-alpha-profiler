@@ -2,6 +2,8 @@ import { useState } from "react";
 import Input from "../Form/Input";
 import Message from "../Layout/Message";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import styles from "./SignIn.module.css";
+
 const API_URL = "http://localhost:3003/session/login";
 
 function SignIn({ setToken }) {
@@ -12,6 +14,7 @@ function SignIn({ setToken }) {
     email: "",
     password: "",
   });
+
   const [formErrors, setFormErrors] = useState();
 
   function handleChange(e) {
@@ -44,7 +47,7 @@ function SignIn({ setToken }) {
           setFormErrors(errors);
           return false;
         }
-        setToken(true)
+        setToken(true);
         navigate("/", {
           state: { message: "Successfully logged in", type: "success" },
         });
@@ -80,16 +83,16 @@ function SignIn({ setToken }) {
     return false;
   }
   return (
-    <div className="container">
-      <div className="form_container">
-        <h1 id="form_header">Sign in</h1>
+    <div className={styles.container}>
+      <div className={styles.form_container}>
+        <h1 className={styles.form_header}>Sign in</h1>
         {location.state?.message && (
           <Message
             message={location.state.message}
             type={location.state.type}
           />
         )}
-        <form onSubmit={submit}>
+        <form className={styles.form} onSubmit={submit}>
           <Input
             type="email"
             text="Email"
@@ -108,8 +111,12 @@ function SignIn({ setToken }) {
             error={formErrors?.password}
           />
 
-          <input value="Sign in" className="input_submit" type="submit" />
-          <p className="input_error">{formErrors?.login}</p>
+          <input
+            value="Sign in"
+            className={styles.input_submit}
+            type="submit"
+          />
+          <p className={styles.input_error}>{formErrors?.login}</p>
           <p>
             Don't have an account? <Link to="/signup"> Register </Link>
           </p>

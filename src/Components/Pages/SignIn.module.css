@@ -7,17 +7,17 @@
     height: 100%;
     min-height: 100vh;
 }
+.form{
+    padding: 20px;
+}
 .form_container{
     background-color: white;
     border: solid 1px rgb(181, 181, 181);
     width: 400px; 
 }
-#form_header{
+.form_header{
     text-align: center;
     font-weight: 400;   
-}
-form{
-    padding: 20px;
 }
 .input_submit{
     margin-top: 20px;

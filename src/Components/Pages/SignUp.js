@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../Form/Input";
+import styles from "./SignUp.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "./SignUp.css";
 const API_URL = "http://localhost:3003/user/create";
 
 function SignUp() {
@@ -52,7 +52,7 @@ function SignUp() {
           return false;
         }
         navigate("/signin", {
-          state: { message: "Account created successfully" ,type: "success"},
+          state: { message: "Account created successfully", type: "success" },
         });
       })
       .catch((err) => console.log(err));
@@ -103,10 +103,10 @@ function SignUp() {
     return false;
   }
   return (
-    <div className="container">
-      <div className="form_container">
-        <h1 id="form_header">Create an account</h1>
-        <form onSubmit={submit}>
+    <div className={styles.container}>
+      <div className={styles.form_container}>
+        <h1 className={styles.form_header}>Create an account</h1>
+        <form className={styles.form} onSubmit={submit}>
           <Input
             type="text"
             text="Username"
@@ -152,11 +152,10 @@ function SignUp() {
 
           <input
             value="Create Account"
-            className="input_submit"
+            className={styles.input_submit}
             type="submit"
           />
-          <p className="input_error">{formErrors?.login}</p>
-
+          <p className={styles.input_error}>{formErrors?.login}</p>
           <p>
             Already have an account? <Link to="/signin"> Login </Link>
           </p>

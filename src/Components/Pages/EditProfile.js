@@ -1,3 +1,4 @@
+import NavBar from "../Layout/NavBar";
 function EditProfile() {
   return (
     <div>
