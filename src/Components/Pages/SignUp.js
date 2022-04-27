@@ -32,7 +32,7 @@ function SignUp() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3004",
+        "Access-Control-Allow-Origin": "http://localhost:3003",
         "Access-Control-Allow-Credentials": true,
       },
       credentials: "include",
