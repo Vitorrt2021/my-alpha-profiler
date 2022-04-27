@@ -4,7 +4,7 @@ import styles from "./SignUp.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Validate from "../../Utils/Validate";
 
-const API_URL = "http://localhost:3003/user/create";
+const API_URL = "https://my-alpha-profiler-backend.herokuapp.com/user/create";
 
 function SignUp() {
   const navigate = useNavigate();

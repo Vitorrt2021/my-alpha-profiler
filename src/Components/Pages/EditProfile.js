@@ -2,7 +2,7 @@ import styles from "./EditProfile.module.css";
 import NavBar from "../Layout/NavBar";
 import { useEffect, useState } from "react";
 import Input from "../Form/Input";
-const API_URL = "http://localhost:3003/user/current";
+const API_URL = "https://my-alpha-profiler-backend.herokuapp.com/user/current";
 
 function EditProfile() {
   const [userData, setUserData] = useState({});
