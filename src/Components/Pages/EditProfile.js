@@ -11,7 +11,7 @@ function EditProfile() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3004",
+        "Access-Control-Allow-Origin": "http://localhost:3003",
         "Access-Control-Allow-Credentials": true,
       },
       credentials: "include",
@@ -38,7 +38,7 @@ function EditProfile() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3004",
+        "Access-Control-Allow-Origin": "http://localhost:3003",
         "Access-Control-Allow-Credentials": true,
       },
       credentials: "include",
