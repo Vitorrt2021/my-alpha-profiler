@@ -2,15 +2,12 @@ import { useState } from "react";
 import Input from "../Form/Input";
 import styles from "./SignUp.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import Validate from "../../Utils/Validate";
-
 const API_URL = "http://localhost:3003/user/create";
 
 function SignUp() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [formErrors, setFormErrors] = useState();
   const [register, setRegister] = useState({
     username: "",
     email: "",
@@ -18,21 +15,19 @@ function SignUp() {
     password: "",
     confirm_password: "",
   });
+  const [formErrors, setFormErrors] = useState();
 
   function handleChange(e) {
     setRegister({
       ...register,
       [e.target.name]: e.target.value,
     });
+    console.log(register)
   }
 
   function submit(e) {
     e.preventDefault();
-
-    const errors = Validate(register);
-    setFormErrors(errors);
-    if (Object.values(errors).length !== 0) return false;
-
+    if (!validate()) return false;
     const requestOptions = {
       method: "POST",
       headers: {
@@ -63,7 +58,51 @@ function SignUp() {
       })
       .catch((err) => console.log(err));
   }
+  function validate() {
+    const errors = {};
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const passwordRegex = /[0-9]/;
+    const { username, email, birth_date, password, confirm_password } =
+      register;
+    if (!username) {
+      errors.username = "Username is required";
+    }
+    if (!email) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(email)) {
+      errors.email = "Invalid Email";
+    }
+    const dateUS = new Date(birth_date);
+    const dateNow = new Date();
 
+    if (!birth_date) {
+      errors.birth_date = "Birth Date is required";
+    } else if (dateUS > dateNow) {
+      errors.birth_date = "Your date of birth is greater than the current date";
+    }
+
+    if (!password) {
+      errors.password = "Password is required";
+    } else if (password.length < 8) {
+      errors.password = "Password is too short";
+    } else if (password.length > 40) {
+      errors.password = "Password is too long";
+    } else if (!passwordRegex.test(password)) {
+      errors.password = "Password must contain at least one number";
+    }
+
+    if (!confirm_password) {
+      errors.confirm_password = "Confirm password is required";
+    } else if (password !== confirm_password) {
+      errors.confirm_password = "Password is different from confirm password";
+    }
+
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      return true;
+    }
+    return false;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
