@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../Form/Input";
 import styles from "./SignUp.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-const API_URL = "http://192.168.0.100:3003/user/create";
+const API_URL = "http://localhost:3003/user/create";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function SignUp() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://192.168.0.100:3000",
+        "Access-Control-Allow-Origin": "http://localhost:3003",
         "Access-Control-Allow-Credentials": true,
       },
       credentials: "include",
