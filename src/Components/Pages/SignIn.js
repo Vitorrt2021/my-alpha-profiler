@@ -3,7 +3,6 @@ import Input from "../Form/Input";
 import Message from "../Layout/Message";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "./SignIn.module.css";
-import ValidateLogin from "../../Utils/ValidateLogin";
 
 const API_URL = "http://localhost:3003/session/login";
 
@@ -27,10 +26,7 @@ function SignIn({ setToken }) {
 
   function submit(e) {
     e.preventDefault();
-
-    const errors = ValidateLogin(login);
-    setFormErrors(errors);
-    if (Object.values(errors).length !== 0) return false;
+    if (!validate()) return false;
 
     const requestOptions = {
       method: "POST",
@@ -58,7 +54,34 @@ function SignIn({ setToken }) {
       })
       .catch((err) => console.log(err));
   }
+  function validate() {
+    const errors = {};
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const passwordRegex = /[0-9]/;
 
+    const { email, password } = login;
+    if (!email) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(email)) {
+      errors.email = "Invalid Email";
+    }
+
+    if (!password) {
+      errors.password = "Password is required";
+    } else if (password.length < 8) {
+      errors.password = "Password is too short";
+    } else if (password.length > 40) {
+      errors.password = "Password is too long";
+    } else if (!passwordRegex.test(password)) {
+      errors.password = "Password must contain at least one number";
+    }
+
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      return true;
+    }
+    return false;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
