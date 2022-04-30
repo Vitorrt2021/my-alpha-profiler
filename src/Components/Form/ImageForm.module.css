@@ -7,5 +7,42 @@
 .imageContainer {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    align-items: center;
+    row-gap: 25px;
+    margin: 0 100px 0 100px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.custom {
+    display: none;
+}
+
+.buttonImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 35px;
+    border: solid 2px gray;
+    border-radius: 20px;
+    font-weight: 700;
+    color: gray;
+}
+
+.buttonImage:hover {
+    border: solid 2px rgb(70, 0, 80);
+    color: rgb(70, 0, 80);
+    animation: anim 1s;
+}
+
+@keyframes anim {
+    0%{
+        border: solid 2px gray;
+        color: gray;
+    }
+    100%{
+        border: solid 2px rgb(70, 0, 80);
+        color: rgb(70, 0, 80);
+    }
 }

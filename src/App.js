@@ -43,7 +43,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute token={token}>
-              <NavBar setToken={setToken} />
+              <NavBar setToken={setToken} namePage={{homeClass: true, editClass: false}}/>
               <Home />
             </ProtectedRoute>
           }
@@ -54,7 +54,7 @@ function App() {
           path="edit"
           element={
             <ProtectedRoute token={token}>
-              <NavBar setToken={setToken} />
+              <NavBar setToken={setToken} namePage={{homeClass: false, editClass: true}}/>
 
               <EditProfile />
             </ProtectedRoute>
