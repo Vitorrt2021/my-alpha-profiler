@@ -3,7 +3,7 @@ import NavBar from "../Layout/NavBar";
 import ImageForm from "../Form/ImageForm";
 import { useEffect, useState } from "react";
 import Input from "../Form/Input";
-const API_URL = "http://192.168.0.100:3003/user/current";
+const API_URL = "http://localhost:3003/user/current";
 
 function EditProfile() {
   const [isLoaded, setLoadedState] = useState(false);
@@ -13,7 +13,7 @@ function EditProfile() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://192.168.0.100:3000",
+        "Access-Control-Allow-Origin": "http://localhost:3003",
         "Access-Control-Allow-Credentials": true,
       },
       credentials: "include",
@@ -36,7 +36,7 @@ function EditProfile() {
   }
 
   function handleImage(e){
-    // a ideia é recarregar o elemento  ap[os cada postagem, caso contrário só pegaremos a primeira imagem selecionada
+    // a ideia é recarregar o elemento  após cada postagem, caso contrário só pegaremos a primeira imagem selecionada
     const image = document.getElementById('image-file').files[0]
     console.log(image);
 
@@ -60,7 +60,7 @@ function EditProfile() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://192.168.0.100:3000",
+          "Access-Control-Allow-Origin": "http://localhost:3003",
           "Access-Control-Allow-Credentials": true,
         },
         credentials: "include",
@@ -120,7 +120,7 @@ function EditProfile() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://192.168.0.100:3000",
+        "Access-Control-Allow-Origin": "http://localhost:3003",
         "Access-Control-Allow-Credentials": true,
       },
       credentials: "include",
@@ -138,49 +138,55 @@ function EditProfile() {
     <div>
       <h1>EditProfile</h1>
       {isLoaded && (
-        <form onSubmit={submit}>
-        <ImageForm src={userData.user_image} handleChange={handleImage}/>
-        <Input
-          type="text"
-          text="Username"
-          name="username"
-          handleOnChange={handleChange}
-          placeholder="Username"
-          value={userData.username}
-        />
+        <form onSubmit={submit} className={styles.editForm}>
+          <div>
+            <ImageForm src={userData.user_image} handleChange={handleImage} id="image"/>
+          </div>
+          
+          <div>
+            <Input
+              type="text"
+              text="Username"
+              name="username"
+              handleOnChange={handleChange}
+              placeholder="Username"
+              value={userData.username}
+            />
 
-        <Input
-          type="email"
-          text="Email"
-          name="email"
-          handleOnChange={handleChange}
-          value={userData.email}
-        />
+            <Input
+              type="email"
+              text="Email"
+              name="email"
+              handleOnChange={handleChange}
+              value={userData.email}
+            />
 
-        <Input
-          type="date"
-          text="Birth Date"
-          name="birth_date"
-          handleOnChange={handleChange}
-          value={userData?userData.birthdate.split("T")[0]:""}
-        />
+            <Input
+              type="date"
+              text="Birth Date"
+              name="birth_date"
+              handleOnChange={handleChange}
+              value={userData?userData.birthdate.split("T")[0]:""}
+            />
 
-        <Input
-          type="password"
-          text="Password"
-          name="password"
-          handleOnChange={handleChange}
-          placeholder="Password"
-        />
+            <Input
+              type="password"
+              text="Password"
+              name="password"
+              handleOnChange={handleChange}
+              placeholder="Password"
+            />
 
-        <Input
-          type="password"
-          text="Confirm Password"
-          name="confirm_password"
-          handleOnChange={handleChange}
-          placeholder="Confirm Password"
-        />
-        <input type="submit" />
+            <Input
+              type="password"
+              text="Confirm Password"
+              name="confirm_password"
+              handleOnChange={handleChange}
+              placeholder="Confirm Password"
+            />
+            <input type="submit" className={styles.update}/>
+          </div>
+          
       </form>
       )}
       

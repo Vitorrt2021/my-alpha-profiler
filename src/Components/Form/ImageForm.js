@@ -12,7 +12,7 @@ function ImageForm({src, handleChange}){
     }
 
     return(
-        <div>
+        <div className={styles.imageContainer}>
             <img className={styles.userImage} src={imageToUse} />
             <input id="image-file" type="file" accept="image/jpeg, image/png" onChange={handleChange}></input>
         </div>
