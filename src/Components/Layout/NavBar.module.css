@@ -1,17 +1,36 @@
 .ul{
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    margin: 15px 10% 15px 10%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+    border: 1px solid gray;
 }
 .ul li a{
     font-size: 20px;
     color: blueviolet;
     text-decoration: none;
     font-weight: 600;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+
 }
 
 .ul li a:hover{
-    color: rgb(91, 22, 155);
+    color: rgb(255, 255, 255);
+    background-color: rgb(91, 22, 155);
+}
+
+.ul li .active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(91, 22, 155);
+}
+
+
+.ul li {
+    display: flex;
+    justify-content: center;
 }

@@ -136,14 +136,13 @@ function EditProfile() {
 
   return (
     <div>
-      <h1>EditProfile</h1>
       {isLoaded && (
         <form onSubmit={submit} className={styles.editForm}>
           <div>
             <ImageForm src={userData.user_image} handleChange={handleImage} id="image"/>
           </div>
           
-          <div>
+          <div className={styles.userInfo}>
             <Input
               type="text"
               text="Username"
