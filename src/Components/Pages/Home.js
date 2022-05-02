@@ -58,7 +58,7 @@ function Home({ setToken }) {
             <strong>Email:</strong> {userData.email}
           </li>
           <li>
-            <strong>Data de Nascimento:</strong> {date(userData.birthdate)}
+            <strong>Birth date:</strong> {date(userData.birthdate)}
           </li>
         </ul>
       </div>
