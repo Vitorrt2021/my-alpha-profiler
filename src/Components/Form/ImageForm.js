@@ -15,7 +15,7 @@ function ImageForm({src, handleChange}){
         <div className={styles.imageContainer}>
             <img className={styles.userImage} src={imageToUse} />
             <input className={styles.custom} name="image-file" id="image-file" type="file" accept="image/jpeg, image/png" onChange={handleChange} />
-            <label for="image-file" className={styles.buttonImage}>Choose Image</label>
+            <label htmlFor="image-file" className={styles.buttonImage}>Choose Image</label>
         </div>
 
     )
