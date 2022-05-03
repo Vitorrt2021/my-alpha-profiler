@@ -37,7 +37,8 @@ function EditProfile() {
 
   function handleImage(e){
     // a ideia é recarregar o elemento  após cada postagem, caso contrário só pegaremos a primeira imagem selecionada
-    const image = document.getElementById('image-file').files[0]
+    const index = document.getElementById('image-file').files.length - 1
+    const image = document.getElementById('image-file').files[index]
     console.log(image);
 
     if(image.size > 2000000){

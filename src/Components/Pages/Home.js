@@ -46,7 +46,7 @@ function Home({ setToken }) {
       </div>
       <div className={styles.contend_container}>
         <h2>{userData.username}</h2>
-        <img src={img (userData.user_img)} />
+        <img src={img (userData.user_image)} />
         <ul>
           <li><strong>Email:</strong> {userData.email}</li>
           <li><strong>Data de Nascimento:</strong> {date(userData.birthdate)}</li>
