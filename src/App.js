@@ -42,13 +42,13 @@ function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute token={token}>
-              <NavBar
-                setToken={setToken}
-                namePage={{ homeClass: true, editClass: false }}
-              />
-              <Home />
-            </ProtectedRoute>
+            // <ProtectedRoute token={token}>
+            //   <NavBar
+            //     setToken={setToken}
+            //     namePage={{ homeClass: true, editClass: false }}
+            //   />
+            <Home />
+            // </ProtectedRoute>
           }
         />
         <Route path="signup" element={<SignUp />} />

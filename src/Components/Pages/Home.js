@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import Message from "../Layout/Message";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import Nav from "../Layout/NavBar";
 
@@ -40,30 +40,41 @@ function Home({ setToken }) {
       .catch((err) => console.log(err));
   }, []);
 
-  return (
-    <div className={styles.container}>
-      <div>
-        {location.state?.message && (
-          <Message
-            message={location.state.message}
-            type={location.state.type}
-          />
-        )}
-      </div>
-      <div className={styles.contend_container}>
-        <h2>{userData.username}</h2>
-        <img src={img(userData.user_image)} />
-        <ul>
-          <li>
-            <strong>Email:</strong> {userData.email}
-          </li>
-          <li>
-            <strong>Birth date:</strong> {date(userData.birthdate)}
-          </li>
-        </ul>
-      </div>
-    </div>
+  return React.createElement(
+    "div",
+    { class: styles.container },
+    React.createElement(
+      "div",
+      null,
+      location.state?.message &&
+        React.createElement(
+          <Message />,
+          { message: location.state.message, type: location.state.type },
+          " "
+        ),
+      React.createElement(
+        "div",
+        { class: styles.contend_container },
+        React.createElement("h2", null, userData.username),
+        React.createElement("img", { src: img(userData.user_image) }),
+        React.createElement(
+          "ul",
+          null,
+          React.createElement(
+            "li",
+            null,
+            React.createElement("strong", null, "Email:"),
+            userData.email
+          ),
+          React.createElement(
+            "li",
+            null,
+            React.createElement("strong", null, "Birth date:"),
+            date(userData.birthdate)
+          )
+        )
+      )
+    )
   );
 }
-
 export default Home;
